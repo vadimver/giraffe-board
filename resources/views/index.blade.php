@@ -9,7 +9,16 @@
                 <div class="card-header">
                     {{$board->title}}
                     @if(Auth::user()->id == $board->user_id)
-                        <a href="{{ url("/delete/$board->id") }}" class="btn btn-danger btn-del">x</a>
+                        <form action="{{ url("/edit/$board->id") }}" method="POST">
+                            <input type="hidden" name="_method" value="delete" />
+                            {{ csrf_field() }}
+                            <button type="submit" class="btn btn-warning btn-edit"><i class="fas fa-edit"></i></button>
+                        </form>
+                        <form action="{{ url("/delete/$board->id") }}" method="POST">
+                            <input type="hidden" name="_method" value="delete" />
+                            {{ csrf_field() }}
+                            <button type="submit" class="btn btn-danger btn-del">x</button>
+                        </form>
                     @endif
                 </div>
                 <div class="card-body">

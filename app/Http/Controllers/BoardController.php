@@ -43,8 +43,10 @@ class BoardController extends Controller
        $board->description = $request->description;
        
        $board->save();
-
-       return redirect('/');
+       
+       $last = Board::orderBy('id','desc')->get()->pluck('id');
+       
+       return redirect('/' . $last[0]);
     }
 
     /**
@@ -66,7 +68,14 @@ class BoardController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = [
+            'boards' => Board::join('users', 'boards.author_id', '=', 'users.id')
+            ->select('boards.*', 'users.name', 'users.id as user_id')
+            ->where('boards.id', $id)
+            ->paginate(5)
+        ];
+        
+        return view('index', $data);
     }
 
     /**
@@ -77,8 +86,12 @@ class BoardController extends Controller
      */
     public function edit($id='')
     {   
-        // если нет то редирект
-        return view('created');
+        
+        $data = [
+            'boards' => Board::where('boards.id', $id)->get()
+        ];
+        
+        return view('created', $data);
     }
 
     /**
@@ -90,7 +103,14 @@ class BoardController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $board = Board::find($id);
+
+        $board->title = $request->title;
+        $board->description = $request->description;
+
+        $board->save();
+        
+        return redirect('/' . $id);
     }
 
     /**
@@ -100,8 +120,9 @@ class BoardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {   
+        Board::destroy($id);
+        return redirect('/');
     }
     
     public function test(Request $request)

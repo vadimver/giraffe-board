@@ -14,16 +14,11 @@ Auth::routes();
 
 Route::get('/', 'BoardController@index');
 Route::get('/edit', ['middleware' => 'auth', 'uses' => 'BoardController@edit'])->name('edit');
+Route::get('/edit/{id}', ['middleware' => 'auth', 'uses' => 'BoardController@edit'])->name('edit_id');
 Route::post('/create', 'BoardController@create');
-/*
-
-Route::get('/edit', 'BoardController@edit');
-
-Route::get('/{id}', 'BoardController@show');
 Route::delete('/delete/{id}', 'BoardController@destroy');
+Route::get('/{id}', 'BoardController@show');
 Route::put('/edit/{id}', 'BoardController@update');
- * 
- */
 
 Route::get('/testregister', 'Auth\RegisterController@register');
 

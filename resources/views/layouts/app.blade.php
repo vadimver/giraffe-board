@@ -88,7 +88,7 @@
                             -->
                         @else
                             
-                            <a class="btn btn-primary" href="{{ route('test') }}">
+                            <a class="btn btn-primary" href="{{ route('new') }}">
                                 Create Ad
                             </a>
 

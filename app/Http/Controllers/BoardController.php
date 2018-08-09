@@ -82,6 +82,11 @@ class BoardController extends Controller
         //
     }
     
+    public function create_board()
+    {
+        return view('created');
+    }
+    
     public function test(Request $request)
     {
         

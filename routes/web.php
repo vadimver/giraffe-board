@@ -12,8 +12,10 @@
 */
 Auth::routes();
 
-Route::get('/', 'BoardController@index')->name('test');
+Route::get('/', 'BoardController@index');
+Route::get('/new', 'BoardController@create_board')->name('new');
 /*
+
 Route::get('/edit', 'BoardController@edit');
 Route::post('/create', 'BoardController@create');
 Route::get('/{id}', 'BoardController@show');

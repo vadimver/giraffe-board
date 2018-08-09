@@ -13,11 +13,16 @@
 Auth::routes();
 
 Route::get('/', 'BoardController@index')->name('test');
+/*
 Route::get('/edit', 'BoardController@edit');
 Route::post('/create', 'BoardController@create');
 Route::get('/{id}', 'BoardController@show');
 Route::delete('/delete/{id}', 'BoardController@destroy');
 Route::put('/edit/{id}', 'BoardController@update');
+ * 
+ */
+
+Route::get('/testregister', 'Auth\RegisterController@register');
 
 
 

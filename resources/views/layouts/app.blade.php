@@ -46,7 +46,7 @@
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-5">
-                                        <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus placeholder="Name">
+                                        <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus placeholder="Username">
 
                                         @if ($errors->has('name'))
                                             <span class="invalid-feedback" role="alert">

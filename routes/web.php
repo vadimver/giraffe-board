@@ -11,6 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'BoardController@');
+Route::get('/edit', 'BoardController@');
+Route::post('/create', 'BoardController@');
+Route::get('/{id}', 'BoardController@');
+Route::delete('/delete/{id}', 'BoardController@');
+Route::put('/edit/{id}', 'BoardController@');

@@ -42,7 +42,41 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            
+                            <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus placeholder="Name">
+
+                                        @if ($errors->has('name'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('name') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                               
+
+                               
+                                    <div class="col-md-5">
+                                        <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required placeholder="Password">
+
+                                        @if ($errors->has('password'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('password') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                               
+                                    <div class="col-md-2">
+                                        <button type="submit" class="btn btn-primary">
+                                            {{ __('Login') }}
+                                        </button>
+                                    </div>
+                                </div>
+                                        
+                                    
+                                
+                            </form>
                             <!--
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>

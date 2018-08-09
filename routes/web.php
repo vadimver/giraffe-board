@@ -10,14 +10,14 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
 
-Route::get('/', 'BoardController@index');
+Route::get('/', 'BoardController@index')->name('test');
 Route::get('/edit', 'BoardController@edit');
 Route::post('/create', 'BoardController@create');
 Route::get('/{id}', 'BoardController@show');
 Route::delete('/delete/{id}', 'BoardController@destroy');
 Route::put('/edit/{id}', 'BoardController@update');
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+

@@ -16,7 +16,7 @@ class CreateBoardsTable extends Migration
         Schema::create('boards', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->integer('author_id');
+            $table->integer('author_id')->unsigned();
             $table->string('title', 300);
             $table->text('description');
             $table->timestamps();

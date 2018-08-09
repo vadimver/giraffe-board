@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
+use App\Board;
 
 class BoardController extends Controller
 {
@@ -21,9 +23,22 @@ class BoardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create(Request $request)
+    {   
+       
+       $this->validate($request, [
+           'title' => 'required|max:300|min:3',
+           'description' => 'required|min:5'
+       ]);
+
+       $board = new Board;
+       $board->author_id = Auth::user()->id;
+       $board->title = $request->title;
+       $board->description = $request->description;
+       
+       $board->save();
+
+       return redirect('/');
     }
 
     /**
@@ -54,9 +69,10 @@ class BoardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit($id='')
+    {   
+        // если нет то редирект
+        return view('created');
     }
 
     /**
@@ -80,11 +96,6 @@ class BoardController extends Controller
     public function destroy($id)
     {
         //
-    }
-    
-    public function create_board()
-    {
-        return view('created');
     }
     
     public function test(Request $request)

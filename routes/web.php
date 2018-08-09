@@ -13,11 +13,12 @@
 Auth::routes();
 
 Route::get('/', 'BoardController@index');
-Route::get('/new', 'BoardController@create_board')->name('new');
+Route::get('/edit', ['middleware' => 'auth', 'uses' => 'BoardController@edit'])->name('edit');
+Route::post('/create', 'BoardController@create');
 /*
 
 Route::get('/edit', 'BoardController@edit');
-Route::post('/create', 'BoardController@create');
+
 Route::get('/{id}', 'BoardController@show');
 Route::delete('/delete/{id}', 'BoardController@destroy');
 Route::put('/edit/{id}', 'BoardController@update');

@@ -4,34 +4,32 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            @foreach($boards as $board)
             <div class="card">
                 <div class="card-header">
-                  Featured
+                    {{$board->title}}
+                    @if(Auth::user()->id == $board->user_id)
+                        <a href="{{ url("/delete/$board->id") }}" class="btn btn-danger btn-del">x</a>
+                    @endif
                 </div>
                 <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  
+                  <p class="card-text">{{$board->description}}</p>
                 </div>
                 <div class="card-footer text-muted row">
                     <div class="card-author col-md-6">
-                        name
+                        {{$board->name}}
                     </div>
-                    <div class="card-time col-md-6">
-                        date
+                    <div class="card-time col-md-4 offset-md-2">
+                        {{$board->created_at}}
+                        
                     </div>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-header">
-                  Featured
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                </div>
-                <div class="card-footer text-muted">
-                  name
-                </div>
+            @endforeach
+            <br>
+            <div class="pagination">
+                {{ $boards->links() }}
             </div>
         </div>
     </div>

@@ -14,8 +14,14 @@ class BoardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('index');
+    {   
+        $data = [
+            'boards' => Board::join('users', 'boards.author_id', '=', 'users.id')
+            ->select('boards.*', 'users.name', 'users.id as user_id')
+            ->paginate(5)
+        ];
+        
+        return view('index', $data);
     }
 
     /**

@@ -10,3 +10,17 @@
     margin-right: 15px;
 }
 
+.pagination {
+    margin-left: 20%;
+}
+
+.card-header {
+    position: relative;
+}
+
+.btn-del {
+     position: absolute;
+     right: 5px;
+     bottom: 5px;
+}
+

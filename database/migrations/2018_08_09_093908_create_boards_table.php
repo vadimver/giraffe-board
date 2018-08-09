@@ -14,8 +14,16 @@ class CreateBoardsTable extends Migration
     public function up()
     {
         Schema::create('boards', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
+            $table->integer('author_id');
+            $table->string('title', 300);
+            $table->text('description');
             $table->timestamps();
+            
+            $table->foreign('author_id')
+                    ->references('id')->on('users')
+                    ->onDelete('cascade');
         });
     }
 

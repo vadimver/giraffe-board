@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', 'BoardController@');
-Route::get('/edit', 'BoardController@');
-Route::post('/create', 'BoardController@');
-Route::get('/{id}', 'BoardController@');
-Route::delete('/delete/{id}', 'BoardController@');
-Route::put('/edit/{id}', 'BoardController@');
+Route::get('/', 'BoardController@index');
+Route::get('/edit', 'BoardController@edit');
+Route::post('/create', 'BoardController@create');
+Route::get('/{id}', 'BoardController@show');
+Route::delete('/delete/{id}', 'BoardController@destroy');
+Route::put('/edit/{id}', 'BoardController@update');

@@ -18,6 +18,11 @@
     position: relative;
 }
 
+.card-footer {
+    width: 100%;
+    margin-left: 0px;
+}
+
 .btn-del {
      position: absolute;
      right: 5px;
@@ -39,3 +44,6 @@
     color: #212F3D;
 }
 
+body {
+    background: #DCDCDC;
+}

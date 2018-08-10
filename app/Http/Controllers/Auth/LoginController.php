@@ -39,7 +39,7 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $this->validateLogin($request);
-        
+
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
         // the IP address of the client making these requests into this application.
@@ -52,30 +52,31 @@ class LoginController extends Controller
         if ($this->attemptLogin($request)) {
             return $this->sendLoginResponse($request);
         }
-        
+
         $this->incrementLoginAttempts($request);
-        
+
         $exist = User::where('name', $request->name)->get();
-        
+
         if (count($exist) != 0) {
             return $this->sendFailedLoginResponse($request);
         } else {
             $register = new Register\RegisterController();
             $reg = $register->create($request);
-            
+
             if ($reg) {
                 $this->attemptLogin($request);
                 return $this->sendLoginResponse($request);
             }
         }
-        
     }
   
-    public function username() {
+    public function username() 
+    {
         return 'name';
     }
 
-    public function __construct() {
+    public function __construct() 
+    {
         $this->middleware('guest')->except('logout');
     }
 

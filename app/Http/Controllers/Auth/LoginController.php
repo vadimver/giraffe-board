@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\User;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Http\Controllers\Auth as Register;
 
 class LoginController extends Controller
 {
@@ -32,6 +35,42 @@ class LoginController extends Controller
      *
      * @return void
      */
+
+    
+    public function login(Request $request)
+    {
+        $this->validateLogin($request);
+        
+        // If the class is using the ThrottlesLogins trait, we can automatically throttle
+        // the login attempts for this application. We'll key this by the username and
+        // the IP address of the client making these requests into this application.
+        if ($this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+
+            return $this->sendLockoutResponse($request);
+        }
+
+        if ($this->attemptLogin($request)) {
+            return $this->sendLoginResponse($request);
+        }
+        
+        $this->incrementLoginAttempts($request);
+        
+        $exist = User::where('name', $request->name)->get();
+        
+        if (count($exist) != 0) {
+            return $this->sendFailedLoginResponse($request);
+        } else {
+            $register = new Register\RegisterController();
+            $reg = $register->create($request);
+            
+            if ($reg) {
+                $this->attemptLogin($request);
+                return $this->sendLoginResponse($request);
+            }
+        }
+        
+    }
     
     public function username() {
         return 'name';

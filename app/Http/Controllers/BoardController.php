@@ -131,17 +131,4 @@ class BoardController extends Controller
         return redirect('/');
     }
     
-    public function test(Request $request)
-    {
-        
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'password' => 'required|string|min:6',
-        ]);
-        
-        return User::create([
-            'name' => $data['name'],
-            'password' => Hash::make($data['password']),
-        ]);
-    }
 }

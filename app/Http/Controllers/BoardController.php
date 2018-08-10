@@ -18,6 +18,7 @@ class BoardController extends Controller
         $data = [
             'boards' => Board::join('users', 'boards.author_id', '=', 'users.id')
             ->select('boards.*', 'users.name', 'users.id as user_id')
+            ->orderBy('id', 'desc')
             ->paginate(5)
         ];
         
@@ -102,7 +103,12 @@ class BoardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
+        $this->validate($request, [
+           'title' => 'required|max:300|min:3',
+           'description' => 'required|min:5'
+        ]);
+        
         $board = Board::find($id);
 
         $board->title = $request->title;

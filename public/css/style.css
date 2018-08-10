@@ -30,3 +30,12 @@
     bottom: 5px;
 }
 
+.board-title {
+    color: #212F3D;
+    font-weight: 600;
+}
+
+.board-title:hover {
+    color: #212F3D;
+}
+

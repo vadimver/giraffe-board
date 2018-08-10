@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-@if (count($errors) > 0)
+
+<div class="container">
+    @if (count($errors) > 0)
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
@@ -9,12 +11,12 @@
             @endforeach
         </ul>
     </div>
-@endif
-
-<div class="container">
+    @endif
+    
     @php
         $val = 0;
     @endphp
+    
     @foreach($boards as $board)
         @php $val++; @endphp
         <form action="{{ url("/edit/$board->id") }}" method="POST">
@@ -27,7 +29,7 @@
                 <textarea class="form-control textarea-form" name="description">{{$board->description}}</textarea>
             </div><br>
             <div class="col-md-2 offset-md-2">
-                <button type="submit" class="btn btn-warning btn-create">Update</button>
+                <button type="submit" class="btn btn-warning btn-create">Save</button>
             </div>
         </form>
     @endforeach

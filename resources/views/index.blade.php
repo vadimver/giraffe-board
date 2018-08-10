@@ -7,7 +7,7 @@
             @foreach($boards as $board)
             <div class="card">
                 <div class="card-header">
-                    {{$board->title}}
+                    <a class="board-title" href="{{ url("/$board->id") }}">{{$board->title}}</a>
                     @if (isset(Auth::user()->id))
                         @if(Auth::user()->id == $board->user_id)
                             <form action="{{ url("/edit/$board->id") }}" method="GET">
@@ -23,14 +23,14 @@
                 </div>
                 <div class="card-body">
                   
-                  <p class="card-text">{{$board->description}}</p>
+                  <p class="card-text board-description">{{$board->description}}</p>
                 </div>
                 <div class="card-footer text-muted row">
                     <div class="card-author col-md-6">
                         {{$board->name}}
                     </div>
                     <div class="card-time col-md-4 offset-md-2">
-                        {{$board->created_at}}
+                        {{date("Y.m.d | H:i", strtotime($board->created_at))}}
                         
                     </div>
                 </div>

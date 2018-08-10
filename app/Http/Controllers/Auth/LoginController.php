@@ -36,7 +36,6 @@ class LoginController extends Controller
      * @return void
      */
 
-    
     public function login(Request $request)
     {
         $this->validateLogin($request);
@@ -71,7 +70,7 @@ class LoginController extends Controller
         }
         
     }
-    
+  
     public function username() {
         return 'name';
     }

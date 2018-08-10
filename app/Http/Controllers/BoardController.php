@@ -87,7 +87,6 @@ class BoardController extends Controller
      */
     public function edit($id='')
     {   
-        
         $data = [
             'boards' => Board::where('boards.id', $id)->get()
         ];

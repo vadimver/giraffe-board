@@ -91,7 +91,16 @@ class BoardController extends Controller
             'boards' => Board::where('boards.id', $id)->get()
         ];
         
-        return view('created', $data);
+        $board_find = Board::find($id);
+        $author_id = $board_find->author_id; 
+        $user_id = Auth::user()->id;
+        
+        if ($author_id == $user_id || $id == '') {
+            return view('created', $data);
+        } else {
+            return redirect('/')->with('status', '403');
+        }   
+        
     }
 
     /**
@@ -126,8 +135,17 @@ class BoardController extends Controller
      */
     public function destroy($id)
     {   
-        Board::destroy($id);
-        return redirect('/');
+        $board_find = Board::find($id);
+        $author_id = $board_find->author_id; 
+        $user_id = Auth::user()->id;
+        
+        if ($author_id == $user_id) {
+            Board::destroy($id);
+            return redirect('/');
+        } else {
+            return redirect('/')->with('status', '403');
+        }
+        
     }
     
 }

@@ -12,11 +12,11 @@
 */
 Auth::routes();
 
-Route::get('/', 'BoardController@index');
+Route::get('/', 'BoardController@index')->name('main');
 Route::get('/edit', ['middleware' => 'auth', 'uses' => 'BoardController@edit'])->name('edit');
 Route::get('/edit/{id}', ['middleware' => 'auth', 'uses' => 'BoardController@edit'])->name('edit_id');
 Route::post('/create', 'BoardController@create');
-Route::delete('/delete/{id}', 'BoardController@destroy');
+Route::get('/delete/{id}', 'BoardController@destroy');
 Route::get('/{id}', 'BoardController@show');
 Route::put('/edit/{id}', 'BoardController@update');
 
